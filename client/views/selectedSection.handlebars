@@ -1,0 +1,69 @@
+
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+
+        <form method="post">
+            <input name="floorNumber" type="number">
+            <button class="btn btn-primary me-md-2" type="submit">Добавить этаж</button>
+        </form>
+        <!--<a href="/addSection"><button class="btn btn-primary me-md-2" type="button">Добавить секцию</button></a>-->
+        <a href=""><button class="btn btn-primary me-md-2" type="button">Техзадание</button></a>
+
+
+
+    </div>
+
+    <main>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {{#each floors}}
+
+                <div class="col mt-3">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal test">Этаж {{number}}</h4>
+
+
+
+                        </div>
+                        <div class="card-body">
+                            <!--<h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>-->
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Квартир 100</li>
+                                <li>Офисов 10</li>
+                                <li>Стояков 2</li>
+                                <li>Приборов 250</li>
+                                <li>Счётчиков воды 250</li>
+                                <li>Теплосчётчиков 100</li>
+                                <li>Электросчётчиков 80</li>
+
+                            </ul>
+                            <!--<select class="form-select" name="selProperty" aria-label="Default select example">
+                                <option selected>Выбор свойства</option>
+
+                                    <option value="1">2</option>
+
+
+                            </select>-->
+                            <div class="row">
+                                <div class="col"><a href="/selectedFloor/{{objectId}}/{{sectionId}}/{{id}}"><button type="button" class="w-100 btn btn-lg btn-primary">К Квартирам</button></a></div>
+
+                                <div class="col"><a href="/addPriborInFlat/{{objectId}}/{{sectionId}}/{{id}}"><button type="button" class="w-100 btn btn-lg btn-primary">К Приборам</button></a></div>
+
+                                <div class="col">
+                                    <form action="delFloor/{{sectionId}}/{{id}}" method="post">
+                                        <button type="submit" class="w-100 btn btn-lg btn-danger">Удалить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        {{/each}}
+        </div>
+    </main>
+
+
+</div>

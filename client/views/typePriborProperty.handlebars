@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+
+        <!--<form method="post">
+            <button class="btn btn-primary me-md-2" type="submit">Добавить этаж</button>
+        </form>-->
+        <!--<a href="/addSection"><button class="btn btn-primary me-md-2" type="button">Добавить секцию</button></a>-->
+        <a href="/typePribor"><button class="btn btn-primary me-md-2" type="button">Вернуться ко всем приборам</button></a>
+
+
+
+    </div>
+    {{#each data}}
+        <h3 class="mt-4">{{name}}</h3>
+    {{/each}}
+    <form class="mt-3" method="post">
+    <div class="row">
+
+            <div class="col-6">
+
+                <select class="form-select" name="selProperty" aria-label="Default select example">
+                    <option selected>Выбор свойства</option>
+                    {{#each property}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+
+                </select>
+                <!--<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option name="selProberty" selected>Выбор свойства</option>
+                    {{#each property}}
+                     <option name="selProberty" value="id">{{name}}</option>
+                    {{/each}}
+                </select>-->
+            </div>
+            <div class="col-auto">
+                <!--<label for="inputPassword2" class="visually-hidden">Свойство</label>-->
+                <input type="text" name="valueProperty" class="form-control" id="inputPassword2" placeholder="Свойство">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Добавить к прибору</button>
+            </div>
+
+    </div>
+    </form>
+
+    {{#each allProperty}}
+        <div class="row">
+
+            <div class="col-6">
+                <input type="text" name="property" class="form-control" id="inputPassword2" value="{{nameProperty}}">
+            </div>
+            <div class="col-auto">
+                <!--<label for="inputPassword2" class="visually-hidden">Свойство</label>-->
+                <input type="text" name="valueProperty" class="form-control" id="inputPassword2" value="{{value}}">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-danger mb-3">Удалить</button>
+            </div>
+
+
+        </div>
+        {{/each}}
+
+
+</div>

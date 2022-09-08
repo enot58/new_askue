@@ -1,0 +1,204 @@
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+
+        {{#each path}}
+        <form method="post" action="/selectedPribor/pdf/{{numberObject}}/{{sectionNum}}/{{numberFloor}}/{{idPribor}}">
+            <button class="btn btn-primary me-md-2" type="submit">Скачать PDF</button>
+        </form>
+        <!--<a href="/addSection"><button class="btn btn-primary me-md-2" type="button">Добавить секцию</button></a>-->
+
+            <a href="/addPriborInFlat/{{numberObject}}/{{sectionNum}}/{{numberFloor}}"><button class="btn btn-primary me-md-2" type="button">Вернуться к приборам</button></a>
+            {{/each}}
+
+
+    </div>
+
+
+    <main>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+            {{#each chanel}}
+
+                <form name="formCart" method="post">
+                    <div class="col mt-3">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="my-0 fw-normal test">Канал {{idPriborNumberChanels}}</h4>
+                                        <input name="idPriborNumberChanels" hidden type="number" value="{{idPriborChannel}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        {{meter}}
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="number" name="numberMeter" class="form-control numberMeter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер счётчика" value="{{numberMeter}}">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="text" name="sumMeter" class="form-control sumMeter" id="exampleInputEmail1" placeholder="Показания" value="{{sum}}">
+                                        <p>{{sumTwo}}</p>
+                                    </div>
+                                </div>
+                                {{#if flatNumber}}
+                                    <select class="form-select mt-3" name="flatOrOffice" aria-label="Default select example">
+                                        <option>Квартира или офис</option>
+
+                                        <option selected value="1">Квартира</option>
+
+                                        <option value="2">Офис</option>
+
+                                    </select>
+
+                                {{else}}
+                                    <select class="form-select mt-3" name="flatOrOffice" aria-label="Default select example">
+                                        <option>Квартира или офис</option>
+
+                                        <option  value="1">Квартира</option>
+
+                                        <option selected value="2">Офис</option>
+
+                                    </select>
+                                {{/if}}
+                                {{#if flatNumber}}
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <input type="number" name="numberFlatOrOffice" class="form-control numberFlat" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер" value="{{flatNumber}}">
+                                        </div>
+                                    </div>
+                                {{else}}
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <input type="number" name="numberFlatOrOffice" class="form-control numberFlat" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер" value="{{officeNumber}}">
+                                        </div>
+                                    </div>
+                                {{/if}}
+                                <div class="row mt-3">
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Отправить</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {{/each}}
+
+        </div>
+    </main>
+</div>
+
+
+
+<!--
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+
+        <form method="post">
+            <button class="btn btn-primary me-md-2" type="submit">Скачать PDF</button>
+        </form>
+        &lt;!&ndash;<a href="/addSection"><button class="btn btn-primary me-md-2" type="button">Добавить секцию</button></a>&ndash;&gt;
+        {{#each path}}
+        <a href="/addPriborInFlat/{{numberObject}}/{{sectionNum}}/{{numberFloor}}"><button class="btn btn-primary me-md-2" type="button">Вернуться к приборам</button></a>
+    {{/each}}
+
+
+    </div>
+
+
+    <main>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+            {{#each chanel}}
+
+                <form name="formCart" method="post">
+                    <div class="col mt-3">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="my-0 fw-normal test">Канал {{chanelId}}</h4>
+                                        <input name="idPriborNumberChanels" type="number" value="{{idPriborChannel}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        {{meter}}
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="number" name="numberMeter" class="form-control numberMeter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер счётчика">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="text" name="sumMeter" class="form-control sumMeter" id="exampleInputEmail1" placeholder="Показания счётчика">
+                                    </div>
+                                </div>
+                                {{#if flatNumber}}
+                                <select class="form-select mt-3" name="flatOrOffice" aria-label="Default select example">
+                                    <option>Квартира или офис</option>
+
+                                        <option selected value="1">Квартира</option>
+
+                                        <option value="2">Офис</option>
+
+                                </select>
+
+                                {{else}}
+                                    <select class="form-select mt-3" name="flatOrOffice" aria-label="Default select example">
+                                        <option>Квартира или офис</option>
+
+                                        <option  value="1">Квартира</option>
+
+                                        <option selected value="2">Офис</option>
+
+                                    </select>
+                                {{/if}}
+                                {{#if flatNumber}}
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="number" name="numberFlatOrOffice" class="form-control numberFlat" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер квартиры" value="{{flatNumber}}">
+                                    </div>
+                                </div>
+                                {{else}}
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <input type="number" name="numberFlatOrOffice" class="form-control numberFlat" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Номер Офиса" value="{{officeNumber}}">
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                <div class="row mt-3">
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Отправить</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {{/each}}
+
+        </div>
+    </main>
+</div>
+
+-->

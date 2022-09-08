@@ -1,0 +1,121 @@
+
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+
+        <form method="post">
+           <div class="row">
+               <div class="col">
+                   <select class="form-select" name="pribor" aria-label="Default select example">
+                       <option selected>Выбрать прибор</option>
+                            {{#each pribor}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+
+                   </select>
+               </div>
+
+               <div class="col">
+
+                   <input type="text" name="numberPribor" class="form-control inputNumber" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   <div id="emailHelp" class="form-text">Количество символов 7</div>
+
+               </div>
+               <div class="col">
+                   <button class="btn btn-primary me-md-2 buttonPribor" type="submit">Добавить прибор</button>
+               </div>
+           </div>
+        </form>
+
+        <!--<form method="post">
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" name="selProperty" aria-label="Default select example">
+                        <option selected>Выбор прибора</option>
+                            <option value="1">4545656454</option>
+                            <option value="1">4545656454</option>
+                            <option value="1">4545656454</option>
+                            <option value="1">4545656454</option>
+                    </select>
+                <div class="col">
+                    <button class="btn btn-primary me-md-2" type="submit">Добавить прибор</button>
+                </div>
+            </div>
+        </form>-->
+
+
+
+        <!--<a href="/addSection"><button class="btn btn-primary me-md-2" type="button">Добавить секцию</button></a>-->
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {{#each data}}
+                    <div class="col mt-3">
+                        <div class="card shadow-sm mt-3">
+
+                            <img src="https://pulsar-msk.ru/media/upload/product/%D0%9D000/%D0%9D00000240.jpg" width="250" height="220" style="margin: 0 auto" alt="img">
+
+                            <div class="card-body">
+                                <!--<div class="card-header">
+                                    Параметры
+                                </div>-->
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Номер : {{number}}</li>
+                                    <!--<li class="list-group-item">Всего каналов : 10</li>
+                                    <li class="list-group-item">Занято каналов : 7</li>
+                                    <li class="list-group-item">Свободно каналов : 3</li>-->
+
+                                </ul>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="/selectedPribor/{{objectId}}/{{sectionId}}/{{floorId}}/{{id}}"><button type="button" class="btn btn-sm btn-outline-success">Перейти</button></a>
+                                        <!--<form action="">
+                                            <button type="button" class="btn btn-sm btn-outline-danger ml-3">Удалить</button>
+                                        </form>-->
+                                    </div>
+                                     <form action="/addPriborInFlat/move/{{objectId}}/{{sectionId}}/{{floorId}}/{{id}}" method="post">
+                                            <input type="number" name="numberFloor" placeholder="Номер этажа">
+                                            <button type="submit" >Перенести</button>
+                                        </form>
+                                    <!--<small class="text-muted">9 mins</small>-->
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-8">
+                                        <form method="post" action="/addPriborInFlat/getExcel/{{objectId}}/{{sectionId}}/{{floorId}}/{{id}}">
+                                            <button type="submit" class="btn btn-sm btn-outline-success">Получить Excel для БД</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+    </div>
+
+</div>
+<script>
+    "use strict";
+
+    /*let inputNumber = document.querySelector('.inputNumber')
+    let buttonPribor = document.querySelector('.buttonPribor')
+
+    inputNumber.addEventListener('keydown', () => {
+        console.log(inputNumber.value.length)
+
+        /!*if (inputNumber.value.length < 7 || inputNumber.value.length > 7) {
+            buttonPribor.disabled = false;
+        }*!/
+
+    })
+    buttonPribor.addEventListener('submit', () => {
+        if (inputNumber.value.length < 7 || inputNumber.value.length > 7) {
+            buttonPribor.disabled = true;
+        }
+    })
+    console.log(buttonPribor)*/
+    //console.log(inputNumber.value)
+</script>
+
