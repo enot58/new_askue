@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 
-import CreateBrandController from "../controller/createBrandController.js";
+import CreateBrandController from "../../controller/adminController/createBrandController.js";
 
 
 

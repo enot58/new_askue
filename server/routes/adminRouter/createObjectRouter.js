@@ -2,7 +2,7 @@
 
 import express from "express";
 const router = express.Router();
-import CreateObjectController from '../controller/createObjectController.js'
+import CreateObjectController from '../../controller/adminController/createObjectController.js'
 
 
 // Рендерим создание объектов и создание

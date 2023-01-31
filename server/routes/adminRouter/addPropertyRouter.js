@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import addPropertyController from "../controller/addPropertyController.js"
+import addPropertyController from "../../controller/adminController/addPropertyController.js"
 
 router.get('/', addPropertyController.getAll)
 router.post('/', addPropertyController.create)

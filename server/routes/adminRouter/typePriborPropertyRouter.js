@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import typePriborPropertyController from "../controller/typePriborPropertyController.js";
+import typePriborPropertyController from "../../controller/adminController/typePriborPropertyController.js";
 
 router.get('/:id', typePriborPropertyController.getOne)
 router.post('/:id', typePriborPropertyController.create)

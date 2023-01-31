@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 
-import CreateTypeMeterController from '../controller/createTypeMeterController.js';
+import CreateTypeMeterController from '../../controller/adminController/createTypeMeterController.js';
 
 
 

@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 
-import CreateMetersController from '../controller/createMetersController.js'
+import CreateMetersController from '../../controller/adminController/createMetersController.js'
 
 
 // Рендерим создание счётчиков и создание

@@ -1,4 +1,4 @@
-import Models from '../models/models.js'
+import Models from '../../models/models.js'
 
 
 class CreateMetersController {

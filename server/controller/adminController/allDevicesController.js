@@ -1,4 +1,4 @@
-import {allDeviceInObjects} from "../helpers/helperDB.js";
+import {allDeviceInObjects} from "../../helpers/helperDB.js";
 import {response} from "express";
 
 

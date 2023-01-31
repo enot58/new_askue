@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import typePriborController from '../controller/typePriborController.js'
+import typePriborController from '../../controller/adminController/typePriborController.js'
 
 router.get('/', typePriborController.getAll)
 router.post('/', typePriborController.create)
