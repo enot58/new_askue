@@ -11,11 +11,12 @@ import {
     findOneDevice
 } from "../helpers/helperDB.js";
 import {findAndReturn, threeNumber} from "../helpers/helperMain.js";
+import {getAllNameDevice, getDeviceObjectAndSectionAndFloor} from "../helpers/deviceHelper.js";
 
 class AddPriborInFlatController {
 
-    async get (request, response) {
-        try {
+    async get (req, res) {
+        /*try {
             //console.log(request.url)
             let path = request.url.split('/');
 
@@ -58,8 +59,22 @@ class AddPriborInFlatController {
 
         } catch (err) {
             console.log(err)
-        }
+        }*/
+        try {
+            const {sectionId,objectId, floorId} = req.query
+            // Нужно наименование приборов для возможности выбора
+            const devicesName = await getAllNameDevice()
+            // Также нужно получить приборы на этом этаже в этом объекте
+            const devicesNumber = await getDeviceObjectAndSectionAndFloor(objectId, sectionId, floorId)
 
+
+            return res.render('addPriborInFlat', {
+                pribor: devicesName,
+                data: devicesNumber
+            })
+        } catch (e) {
+            console.log(e)
+        }
 
     }
 

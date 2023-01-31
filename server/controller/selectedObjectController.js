@@ -1,11 +1,12 @@
 import Models from '../models/models.js'
+import {getAllSection, getOneObject} from "../helpers/objectHelper.js";
 
 
 class SelectedObjectController {
 
-    async getOne (request, response) {
+    async getOne (req, res) {
 
-        try {
+        /*try {
             const {id} = request.params;
             const object = await Models.Section.findAll({
                 where: {
@@ -22,6 +23,22 @@ class SelectedObjectController {
 
         } catch (err) {
             console.log(err)
+        }*/
+        try {
+            // Получим id объекта
+            const {id: idObject} = req.query
+            const {name} = await getOneObject(idObject)
+            // Получим все секции
+            const sections = await getAllSection(idObject)
+            console.log(sections)
+            return res.render('selectedObject', {
+                section: sections,
+                object: {
+                    name: name
+                }
+            })
+        } catch (e) {
+            console.log(e)
         }
 
     }

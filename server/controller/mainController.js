@@ -8,15 +8,6 @@ class MainController {
         try{
 
             const allObj = [];
-            //==========================
-            /*const pribors = await Models.Pribors.findAll({
-                raw :true,
-                include: [Models.NameProperty]
-            })*/
-
-            //console.log(pribors)
-
-            // ============================
             function retTrueOrFalse(n) {
                 if (n) {
 

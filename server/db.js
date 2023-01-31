@@ -3,7 +3,7 @@ import {Sequelize} from "sequelize";
 let passwordHome = '28162342';
 let passwordJob = ''
 
-const sequelize = new Sequelize('askue','root', passwordJob, {
+const sequelize = new Sequelize('full_askue','root', passwordHome, {
     dialect: "mysql",
     host: '127.0.0.1',
     port: '3306',
@@ -12,5 +12,6 @@ const sequelize = new Sequelize('askue','root', passwordJob, {
     },
     logging: false
 });
+
 
 export default sequelize;

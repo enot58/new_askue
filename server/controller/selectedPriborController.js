@@ -1,10 +1,11 @@
 import Models from '../models/models.js'
 import fs from 'fs'
 import PDFDocument from 'pdfkit-table';
+import {findChannelDevice} from "../helpers/deviceHelper.js";
 
 class SelectedPriborController{
-    async get (request, response) {
-        try{
+    async get (req, res) {
+        /*try{
             // Нужно получить и отдать каналы
             // Получим данные из пути
             let path = request.url.split('/');
@@ -15,13 +16,13 @@ class SelectedPriborController{
                 numberFloor: path[3],
                 idPribor: path[4],
             }
-            /* return -
+            /!* return -
             {
                 numberObject: '1',
                 sectionNum: '1',
                 numberFloor: '14',
                 idPribor: '4'
-            }*/
+            }*!/
 
             // Передаём путь для возврата назад
             const arrForUrl = []
@@ -43,24 +44,24 @@ class SelectedPriborController{
                 },
                 raw: true
             })
-            /* return
+            /!* return
             {
                 id: 40,
                 createdAt: 2022-06-20T05:16:55.000Z,
                 updatedAt: 2022-06-20T05:16:55.000Z,
                 priborNumberId: 4,
                 chanelId: 10
-            }*/
+            }*!/
 
             // Получаем все квартиры по прибору в котором находимся
             // НЕ РАБОТАЕТ
-            /*const haveFlat = await Models.PriborNumberChanelFlat.findAll({
+            /!*const haveFlat = await Models.PriborNumberChanelFlat.findAll({
                 where: {
                     priborNumberChanelId: objPath.idPribor
                 },
 
                 raw: true
-            })*/
+            })*!/
             const testArr = []
             //
             for (let i = 0; i < priborNumTest.length; i++) {
@@ -134,7 +135,7 @@ class SelectedPriborController{
 
 
             //console.log(testArr)
-            /*{
+            /!*{
                 idPriborChannel: 39,
                  priborNumberId: 4,
                 idPriborNumberChanels: 9,
@@ -144,7 +145,7 @@ class SelectedPriborController{
                 meterNumberId: 2,
                 numberMeter: 321,
                 sum: '321'
-            }*/
+            }*!/
 
 
 
@@ -156,6 +157,18 @@ class SelectedPriborController{
             })
         } catch (err) {
             console.log(err)
+        }*/
+        try {
+            const {objectId,sectionId,floorId,deviceId} = req.query
+
+            const channels = await findChannelDevice(deviceId)
+
+
+            return res.render('selectedPribor', {
+                chanel: channels
+            })
+        } catch (e) {
+            console.log(e)
         }
     }
 

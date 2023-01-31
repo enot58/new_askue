@@ -1,10 +1,11 @@
 import Models from '../models/models.js'
+import {getAllFloorSection, getOneObject, getOneSection} from "../helpers/objectHelper.js";
 
 
 class SelectedSectionController {
 
-    async getAll (request, response) {
-        try {
+    async getAll (req, res) {
+        /*try {
             let allFloors = []
 
             let path = request.url.split('/');
@@ -15,7 +16,7 @@ class SelectedSectionController {
             const objectId = objPath.numberObject;
             // Id Секции
             const {id} = request.params;
-
+            // Пол
             const floor = await Models.Floors.findAll({
                 where: {
                     sectionId: id,
@@ -31,6 +32,26 @@ class SelectedSectionController {
 
         } catch (err) {
             console.log(err)
+        }*/
+        try {
+            const {idSection, idObject} = req.query
+            const {name} = await getOneObject(idObject)
+            const {number} = await getOneSection(idSection)
+            // Получим все этажи по id секции
+            const floors = await getAllFloorSection(idSection)
+
+
+            return res.render('selectedSection', {
+                object: {
+                    name: name
+                },
+                section: {
+                    number: number
+                },
+                floors: floors
+            })
+        } catch (e) {
+            console.log(e)
         }
 
     }
