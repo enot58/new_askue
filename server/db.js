@@ -1,7 +1,7 @@
 import {Sequelize} from "sequelize";
 
-let passwordHome = '';
-let passwordJob = '28162342'
+let passwordHome = '28162342';
+let passwordJob = ''
 
 const sequelize = new Sequelize('askue','root', passwordJob, {
     dialect: "mysql",
@@ -9,7 +9,8 @@ const sequelize = new Sequelize('askue','root', passwordJob, {
     port: '3306',
     define: {
 
-    }
+    },
+    logging: false
 });
 
 export default sequelize;

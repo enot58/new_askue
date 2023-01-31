@@ -317,12 +317,13 @@ ValueProperty.init({
     },
     value: {
         type: Sequelize.STRING,
-        unique: true,
+        unique: false,
         allowNull: false
     }
 }, {
     sequelize, modelName: 'value_property'
 })
+
 
 /*
 class PriborsValueProperty extends Sequelize.Model {}

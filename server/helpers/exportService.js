@@ -32,14 +32,16 @@ const exportMetersToExcel = (meters, workSheetColumnNames, workSheetName, filePa
     const data = meters.map((meter) => {
         return [
             meter.typePlace,
-            meter.flats,
-            meter.typeMeter,
-            meter.paramRes,
-            meter.namePribor,
-            `Канал${meter.channel}`,
-            meter.priborNumber,
-            meter.typeMeter,
-            meter.serNumberMeter
+            meter.namePlace,
+            meter.resurs,
+            meter.paramsResurs,
+            meter.twoDevice,
+            meter.paramsTwoDevice,
+            meter.networkAddress,
+            meter.oneDevice,
+            meter.serialNumber,
+            meter.additionInfo,
+
         ]
     })
 

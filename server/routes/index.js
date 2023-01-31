@@ -23,7 +23,7 @@ import addPropertyRouter from "./addPropertyRouter.js"
 import typePriborPropertyRouter from "./typePriborPropertyRouter.js"
 import addPriborInFlatRouter from "./addPriborInFlatRouter.js";
 import selectedPriborRouter from "./selectedPriborRouter.js"
-import deviceConfiguredRouter from "./deviceConfiguredRouter.js"
+import allDevicesRouter from "./allDevicesRouter.js";
 
 
 
@@ -57,6 +57,9 @@ router.use('/typePriborProperty', typePriborPropertyRouter)
 // Создаём свойства
 router.use('/addProperty', addPropertyRouter);
 
+// Все устройства
+router.use('/allDevices', allDevicesRouter)
+
 
 // ======================= Конец Админ Панели ============================//
 //                                                                         //
@@ -85,9 +88,6 @@ router.use('/addPriborInFlat', addPriborInFlatRouter)
 // Перейти к прибору и добавить квартиры
 router.use('/selectedPribor', selectedPriborRouter)
 
-
-// Распределение КДЛ
-router.use('/deviceConfigured', deviceConfiguredRouter)
 
 //==================================================//
 

@@ -2,6 +2,15 @@ import Models from '../models/models.js'
 import Model, {Sequelize} from "sequelize";
 
 import exportMetersToExcel from "../helpers/exportService.js";
+import {
+    descriptionDevice,
+    findChannelDevice,
+    findDevice,
+    findDeviceAndMeter,
+    findFlat,
+    findOneDevice
+} from "../helpers/helperDB.js";
+import {findAndReturn, threeNumber} from "../helpers/helperMain.js";
 
 class AddPriborInFlatController {
 
@@ -203,12 +212,13 @@ class AddPriborInFlatController {
         try {
             let path = request.url.split('/');
             let objPath = {
-                numberObject: path[2],
-                sectionNum: path[3],
-                numberFloor: path[4],
-                numberPribor: path[5]
+                idObject: path[2],
+                idNum: path[3],
+                idFloor: path[4],
+                idPribor: path[5]
             }
             //console.log(objPath)
+            const {idObject, idNum, idFloor, idPribor} = objPath
 
             const mainObj = []
 
@@ -223,20 +233,150 @@ class AddPriborInFlatController {
                 numberMeter: 2344
             }
 
-
-
+            //---------------------------------------------------------------------------------//
             // Получаем прибор
-            const pribors = await Models.PriborNumber.findOne({
-                where: {
-                    id: objPath.numberPribor
+
+            const device = await findChannelDevice(idPribor)
+
+            const test = () => {
+                // Задача определить холодную и горячую воду
+                // Если холодная и такой номер уже встречался
+
+            }
+            const listFlatCool = []
+            const listFlatHeat = []
+            const paramsImportCool = []
+            const paramsImportHeat = []
+
+            //console.log(device)
+
+
+
+
+            device.map((unit) => {
+                const {numberDevice, numberMeter,channelNumber, numberFlat} = unit
+                const result = channelNumber % 2
+
+                if (findAndReturn(listFlatCool,numberFlat) && findAndReturn(listFlatHeat,numberFlat)) {
+                    if (result === 0) {
+                        paramsImportHeat.push({
+                            typePlace: "Квартира",
+                            namePlace: threeNumber(numberFlat),
+                            resurs: result === 0 ? "ГВС" : "ХВС",
+                            paramsResurs: result === 0 ? "Объём4(м3)" : 'Объём3(м3)',
+                            twoDevice: "Пульсар10-М",
+                            paramsTwoDevice: `Канал${channelNumber}`,
+                            networkAddress: numberDevice,
+                            oneDevice: result === 0 ? "ГВС" : "ХВС",
+                            serialNumber: numberMeter,
+                            additionInfo: `Квартира_№${numberFlat}`,
+                        })
+                    } else {
+                        paramsImportCool.push({
+                            typePlace: "Квартира",
+                            namePlace: threeNumber(numberFlat),
+                            resurs: result === 0 ? "ГВС" : "ХВС",
+                            paramsResurs: result === 0 ? "Объём4(м3)" : 'Объём3(м3)',
+                            twoDevice: "Пульсар10-М",
+                            paramsTwoDevice: `Канал${channelNumber}`,
+                            networkAddress: numberDevice,
+                            oneDevice: result === 0 ? "ГВС" : "ХВС",
+                            serialNumber: numberMeter,
+                            additionInfo: `Квартира_№${numberFlat}`,
+                        })
+                    }
+
+                } else {
+                    if (result === 0) {
+                        listFlatHeat.push(numberFlat)
+                        paramsImportHeat.push({
+                            typePlace: "Квартира",
+                            namePlace: threeNumber(numberFlat),
+                            resurs: result === 0 ? "ГВС" : "ХВС",
+                            paramsResurs: result === 0 ? "Объём2(м3)" : 'Объём1(м3)',
+                            twoDevice: "Пульсар10-М",
+                            paramsTwoDevice: `Канал${channelNumber}`,
+                            networkAddress: numberDevice,
+                            oneDevice: result === 0 ? "ГВС" : "ХВС",
+                            serialNumber: numberMeter,
+                            additionInfo: `Квартира_№${numberFlat}`,
+
+                        })
+                    } else {
+                        listFlatCool.push(numberFlat)
+                        paramsImportCool.push({
+                            typePlace: "Квартира",
+                            namePlace: threeNumber(numberFlat),
+                            resurs: result === 0 ? "ГВС" : "ХВС",
+                            paramsResurs: result === 0 ? "Объём2(м3)" : 'Объём1(м3)',
+                            twoDevice: "Пульсар10-М",
+                            paramsTwoDevice: `Канал${channelNumber}`,
+                            networkAddress: numberDevice,
+                            oneDevice: result === 0 ? "ГВС" : "ХВС",
+                            serialNumber: numberMeter,
+                            additionInfo: `Квартира_№${numberFlat}`,
+                        })
+                    }
+
                 }
-            }).catch((err) => {
+
+            })
+            const listFlat = [...listFlatCool, ...listFlatHeat]
+            //console.log(listFlat)
+            const paramsImport = [...paramsImportCool, ...paramsImportHeat]
+            //console.log(paramsImport)
+            //---------------------------------------------------------------------------------//
+
+
+            const workSheetColumnName = [
+                'Тип места',
+                'Имя места',
+                'Ресурс',
+                'Параметр ресурса',
+                'Вторичный прибор',
+                'Параметер вторичного прибора',
+                'Сетевой адрес',
+                'Первичный прибор',
+                'Серийный номер первичного прибора',
+                "Доп описание 1 вторичного прибора"
+            ]
+            // Получим данные по прибору
+            const oneDevice = await findOneDevice(idPribor)
+            const {numberDevice, sectionNumber, floorNumber} = oneDevice
+
+            const workSheetName = 'Основная';
+            const filePath = `./priborXlsx/${numberDevice}_${sectionNumber}_${floorNumber}.xlsx`
+            exportMetersToExcel(paramsImport, workSheetColumnName, workSheetName, filePath)
+
+
+            await response.download(filePath, (err) => {
                 console.log(err)
+
+                if (err) {
+                    console.log('Что то есть');
+                    let active = false;
+
+                    setTimeout(() => {
+                        response.download(filePath, (err) => {
+                            console.log(err);
+
+                            if (err) {
+                                console.log('Ошибка внутри')
+                            }else {
+                                active = true;
+                            }
+                        })
+                    }, 500)
+
+                }
             })
 
+        } catch (e) {
+            console.log(e)
+        }
 
 
-            // Нам нужны каналы одного прибора
+            /*// Нам нужны каналы одного прибора
             const priborNumberChannel = await Models.PriborNumberChanel.findAll({
                 where: {
                     priborNumberId: pribors.id
@@ -357,7 +497,7 @@ class AddPriborInFlatController {
                 }
             }
             await pushMeter()
-            /*{
+            /!*{
                 priborNumberChannelId: 155,
                 channelId: 5,
                 channel: 5,
@@ -367,7 +507,7 @@ class AddPriborInFlatController {
                 paramRes: 'Объём1(м3)',
                 flats: 444,
                 serNumberMeter: 12224444
-            }*/
+            }*!/
             console.log(mainObj)
 
             const workSheetColumnName = [
@@ -426,7 +566,7 @@ class AddPriborInFlatController {
                 console.log(err)
                 console.log(`Ошибочка ${err}`)
             }
-        }
+        }*/
 
 
 
