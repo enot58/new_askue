@@ -30,7 +30,7 @@ class SelectedObjectController {
             const {name} = await getOneObject(idObject)
             // Получим все секции
             const sections = await getAllSection(idObject)
-            console.log(sections)
+            
             return res.render('selectedObject', {
                 section: sections,
                 object: {

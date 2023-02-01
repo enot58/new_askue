@@ -34,8 +34,11 @@ class SelectedSectionController {
             console.log(err)
         }*/
         try {
-            const {idSection, idObject} = req.query
-            const {name} = await getOneObject(idObject)
+            console.log('Я тут')
+            const {idSection, objectId} = req.query
+        
+
+            const {name} = await getOneObject(objectId)
             const {number} = await getOneSection(idSection)
             // Получим все этажи по id секции
             const floors = await getAllFloorSection(idSection)
