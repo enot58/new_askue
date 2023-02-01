@@ -1,9 +1,10 @@
 import {Sequelize} from "sequelize";
+import * as dotenv from 'dotenv' 
+dotenv.config()
 
-let passwordHome = '28162342';
-let passwordJob = ''
 
-const sequelize = new Sequelize('full_askue','root', passwordHome, {
+
+const sequelize = new Sequelize(process.env.NAME_DB,'root', process.env.PASSWORD_DB, {
     dialect: "mysql",
     host: '127.0.0.1',
     port: '3306',
