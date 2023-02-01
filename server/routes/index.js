@@ -24,6 +24,8 @@ import typePriborPropertyRouter from "./adminRouter/typePriborPropertyRouter.js"
 import addPriborInFlatRouter from "./addPriborInFlatRouter.js";
 import selectedPriborRouter from "./selectedPriborRouter.js"
 import allDevicesRouter from "./adminRouter/allDevicesRouter.js";
+import selectTypePageRouter from "./selectTypePageRouter.js";
+import addHeatMeterRouter from "./addHeatMeterRouter.js";
 
 
 
@@ -88,6 +90,10 @@ router.use('/selectedFloor', selectedFloorRouter)
 router.use('/addPriborInFlat', addPriborInFlatRouter)
 // Перейти к прибору и добавить квартиры
 router.use('/selectedPribor', selectedPriborRouter)
+// Выбор типа
+router.use('/selectTypePage', selectTypePageRouter)
+// счётчики тепла
+router.use('/addHeatMeter', addHeatMeterRouter)
 
 
 //==================================================//

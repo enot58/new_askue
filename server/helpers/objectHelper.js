@@ -152,3 +152,31 @@ export const findFlat = async (id) => {
     }
 }
 
+// Поиск квартиры по объектам и секциям
+
+export const findFlatObjectSection = async (sectionId, objectId) => {
+    try {
+        const listFlats = []
+        const flats = await Models.Flats.findAll({
+            where: {
+                sectionId: sectionId,
+                objectId: objectId
+            },
+            raw: true
+        })
+
+        const {floorsNumber} = await Models.Floors.findOne({
+            where: {
+                id: sectionId
+            }
+        })
+
+        for (const flat of flats) {
+            console.log(flat)
+        }
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+

@@ -34,7 +34,7 @@ class SelectedSectionController {
             console.log(err)
         }*/
         try {
-            console.log('Я тут')
+
             const {idSection, objectId} = req.query
         
 
