@@ -46,12 +46,7 @@ class CreatePriborController {
 
     async create (request, response) {
         try {
-            const {nameMeter} = request.body
-            const {typeMeter} = request.body
-            const {brand} = request.body;
-            console.log(brand)
-
-            console.log(request.body)
+            const {nameMeter, typeMeter, brand} = request.body
 
             const meters = await Models.Meter.create({
                 name: nameMeter,

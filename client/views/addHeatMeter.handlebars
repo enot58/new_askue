@@ -1,22 +1,53 @@
 <div class="container">
     <div class="row mt-3">
+        <div class="col" style="display: flex; justify-content: end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFloor">Добавить этаж</button>
+        </div>
+        <!-- Модальное окно -->
+        <div class="modal fade" id="addFloor" tabindex="-1" aria-labelledby="addFloor" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/addFloor" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addFloor">Добавление этажа</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col" style="display: flex; justify-content: center; align-items: center">
+                                <input type="number" class="form-control" id="flat" placeholder="Номер этажа">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-3">
         <form action="" method="post">
             <div class="row">
-                <div class="col">
-                    <label for="floor" class="form-label">Номер этажа</label>
-                    <input type="number" class="form-control" id="floor">
+                <div class="col" style="display: flex; justify-content: center; align-items: center">
+
+                    <select class="form-select" aria-label="Выбор этажа">
+                        <option selected>Откройте это меню выбора</option>
+                        {{#each floors}}
+                            <option value="{{id}}">{{number}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col" style="display: flex; justify-content: center; align-items: center">
+                    <input type="number" class="form-control" id="flat" placeholder="Квартира">
+                </div>
+                <div class="col" style="display: flex; justify-content: center; align-items: center">
+                    <input type="number" class="form-control" id="line" placeholder="Линия">
                 </div>
                 <div class="col">
-                    <label for="flat" class="form-label">Квартира</label>
-                    <input type="number" class="form-control" id="flat">
-                </div>
-                <div class="col">
-                    <label for="line" class="form-label">Линия</label>
-                    <input type="number" class="form-control" id="line">
-                </div>
-                <div class="col">
-                    <label for="number" class="form-label">Номер</label>
-                    <input type="number" class="form-control" id="number">
+
+                    <input type="number" class="form-control" id="number" placeholder="Номер счётчика">
                 </div>
                 <div class="col" style="display: flex; justify-content: center; align-items: center">
                     <button type="submit" class="btn btn-primary">Добавить</button>
@@ -33,6 +64,7 @@
                 <th scope="col">Квартира №</th>
                 <th scope="col">Линия №</th>
                 <th scope="col">Теплосчётчик №</th>
+                <th scope="col">Опции</th>
             </tr>
             </thead>
             <tbody>
@@ -41,8 +73,43 @@
                 <th scope="row">1</th>
                 <td>{{'floor.id'}}</td>
                 <td>{{number}}</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="row mt-3">
+                        <div class="col" style="display: flex; justify-content: end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newFlat">Изменить</button>
+                        </div>
+                        <!-- Модальное окно -->
+                        <div class="modal fade" id="newFlat" tabindex="-1" aria-labelledby="addFloor" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="/addFloor" method="post">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addFloor">Добавление этажа</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{#with flats}}
+                                            <div class="col" style="display: flex; justify-content: center; align-items: center">
+                                                <label for="floor" class="form-label">Номер этажа</label>
+                                                <input type="number" class="form-control" id="floor" value="{{'floor.id'}}">
+                                            </div>
+                                            <div class="col" style="display: flex; justify-content: center; align-items: center">
+                                                <label for="flat" class="form-label">Номер квартиры</label>
+                                                <input type="number" class="form-control" id="flat" value="{{number}}">
+                                            </div>
+                                            {{/with}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                </td>
             </tr>
             {{/each}}
             </tbody>

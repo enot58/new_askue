@@ -5,7 +5,7 @@ import CreatePriborController from '../../controller/adminController/createPribo
 
 
 router.get('/', CreatePriborController.getAll)
-
+router.post("/add", CreatePriborController.create)
 
 
 

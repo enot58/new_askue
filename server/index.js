@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({
 
 // Подключаем основной роутер
 import router from "./routes/index.js";
+import {Meter} from "./migrations/testMigration.js";
 
 
 //------------------------
@@ -46,7 +47,6 @@ app.set('views', '../client/views');
 // Здесь подключаем общий роутер
 //сменил с api на /
 app.use('/', router);
-
 
 
 

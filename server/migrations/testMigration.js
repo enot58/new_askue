@@ -1,18 +1,20 @@
+import {Sequelize} from "sequelize";
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 
-
-module.exports = {
+export const Meter = {
     up: (queryInterface, Sequelize) => queryInterface.addColumn(
-        'Users',
-        'lastName',
+        'meter_number',
+        'typeMeterId',
         {
-            type: Sequelize.STRING,
+            type: Sequelize.Number,
             allowNull: false
         }
     ),
 
     down: (queryInterface, Sequelize) => queryInterface.removeColumn(
-        'Users',
-        'lastName'
+        'meter_number',
+        'typeMeterId'
     )
 };
